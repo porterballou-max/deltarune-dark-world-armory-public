@@ -41,7 +41,7 @@ class DT_Item():
         self.other_effects = other_effects
 
 BASE_URL = "https://deltarune.wiki"
-DT_CHAPTER_LATEST = 4
+DT_CHAPTER_LATEST = 5
 DTCharacters = []
 DTEquipment = { "Weapons" : [], "Armors" : [] }
 
@@ -53,10 +53,11 @@ def extract_items(local_url, category, info_label):
     items = []
 
     # Iterate over all entries, extract data from corresponding pages 
-    entries = soup.find("div", class_="mw-category-generated").find_all("li")
+    entries = soup.find("div", id="mw-pages").find_all("li")
     entry_counter=0
     for x in entries:
         x_url = BASE_URL + x.find("a").get("href")
+        
         x_response = requests.get(x_url)
         x_soup = BeautifulSoup(x_response.text, "html.parser")
 
@@ -120,7 +121,7 @@ def load_database():
     #         build a loadout for. 
     # 1.1: Load "main characters" page.
     print("Loading party members...")
-    party_members_url = BASE_URL + "/w/Category:Main_Characters"
+    party_members_url = BASE_URL + "/w/Category:Main_characters"
     response = requests.get(party_members_url)
     # 1.2: Load HTML data for each party member. 
     soup = BeautifulSoup(response.text, "html.parser")
