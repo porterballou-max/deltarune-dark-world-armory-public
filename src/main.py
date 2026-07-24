@@ -1,6 +1,7 @@
 """automation.py coordinates the primary systems automation workflow executed by setup.sh."""
 
 from bs4 import BeautifulSoup
+from pathlib import Path 
 import requests
 from enum import Enum
 import re
@@ -214,13 +215,17 @@ def loadout_builder():
 
     print(loadout_string)
 
-    print("Would you like to save this loadout?")
-    do_save = select_option(["Yes", "No"])
-
-    if do_save == 1:
-        new_file_name = f"Chapter_{DT_CHAPTER_LATEST}_{usr_char_name}_{loadout_stat.capitalize()}"
-        with open(f"./output/{new_file_name}", "w") as f:
-            f.write(loadout_string)
+    # print("Would you like to save this loadout?")
+    # do_save = select_option(["Yes", "No"])
+    # 
+    # if do_save == 1:
+    #     new_file_name = f"Chapter_{DT_CHAPTER_LATEST}_{usr_char_name}_{loadout_stat.capitalize()}"
+    #     new_file_path = f"./output/{new_file_name}"
+    #     # ensure file is created 
+    #     if not Path(new_file_path).is_file():
+    #         open(new_file_path, "x")
+    #     with open(new_file_path, "w") as f:
+    #         f.write(loadout_string)
 
 def main_menu():
     while 1==1:
